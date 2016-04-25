@@ -93,7 +93,6 @@ class Postgralcon:
     def tryConnect(self):
         if(self.connected):
             return
-        global host,user,pswd,port,db
         self._conn = psycopg2.connect(host=host , user=user, password=pswd , port=port, database=db)
         self._curs = self._conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         self.connected = True
@@ -117,9 +116,192 @@ class Postgralcon:
         v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
         return self.newFalconData(key='connections',val=v);
     
+    def get_commits(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='commits',val=v);
+    
+    def get_rollbacks(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rollbacks',val=v);
+    
+    def get_disk_read(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='disk_read',val=v);
+        
+    def get_buffer_hit(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='buffer_hit',val=v);
+        
+    def get_rows_returned(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rows_returned',val=v);
+    
+    def get_rows_fetched(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rows_fetched',val=v);
+        
+    def get_rows_inserted(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rows_inserted',val=v);
+    
+    def get_rows_updated(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rows_updated',val=v);
+        
+    def get_rows_deleted(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rows_deleted',val=v);
+        
     def get_database_size(self):
-        global db
-        v = self.__get('select pg_database_size(\''+db+'\');')[0]
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='database_size',val=v);
+        
+    def get_deadlocks(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='deadlocks',val=v);
+    
+    def get_temp_bytes(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='temp_bytes',val=v);
+    
+    def get_temp_files(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='temp_files',val=v);
+    
+    def get_bgwriter.checkpoints_timed(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.checkpoints_timed',val=v);
+    
+    def get_bgwriter.checkpoints_requested(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.checkpoints_requested',val=v);
+    
+    def get_bgwriter.buffers_checkpoint(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.buffers_checkpoint',val=v);
+    
+    def get_bgwriter.buffers_clean(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.buffers_clean',val=v);
+    
+    def get_bgwriter.maxwritten_clean(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.maxwritten_clean',val=v);
+    
+    def get_bgwriter.buffers_backend(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.buffers_backend',val=v);
+    
+    def get_bgwriter.buffers_alloc(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.buffers_alloc',val=v);
+        
+    def get_bgwriter.buffersbackendfsync(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.buffersbackendfsync',val=v);
+    
+    def get_bgwriter.write_time(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.write_time',val=v);
+    
+    def get_bgwriter.sync_time(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='bgwriter.sync_time',val=v);
+    
+    def get_locks(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='locks',val=v);
+        
+    def get_seq_scans(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='seq_scans',val=v);
+    
+    def get_seqrowsread(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='seqrowsread',val=v);
+    
+    def get_index_scans(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='index_scans',val=v);
+        
+    def get_indexrowsfetched(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='indexrowsfetched',val=v);
+        
+    def get_rowshotupdated(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='rowshotupdated',val=v);
+        
+    def get_live_rows(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='live_rows',val=v);
+        
+    def get_dead_rows(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='dead_rows',val=v);
+        
+    def get_indexrowsread(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='indexrowsread',val=v);
+    
+    def get_table_size(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='table_size',val=v);
+        
+    def get_index_size(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='index_size',val=v);
+        
+    def get_total_size(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='total_size',val=v);
+        
+    def get_table.count(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='table.count',val=v);
+        
+    def get_max_connections(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='max_connections',val=v);
+        
+    def get_percentusageconnections(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='percentusageconnections',val=v);
+        
+    def get_heapblocksread(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='heapblocksread',val=v);
+        
+    def get_heapblockshit(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='heapblockshit',val=v);
+        
+    def get_indexblocksread(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='indexblocksread',val=v);
+        
+    def get_indexblockshit(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='indexblockshit',val=v);
+        
+    def get_toastblocksread(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='toastblocksread',val=v);
+    
+    def get_toastblockshit(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='toastblockshit',val=v);
+    
+    def get_toastindexblocks_read(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='toastindexblocks_read',val=v);
+        
+    def get_toastindexblocks_hit(self):
+        v = self.__get('SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();')[0]
+        return self.newFalconData(key='toastindexblocks_hit',val=v);
+        
+    def get_database_size(self):
+        v = self.__get('select pg_database_size(\''+self._db+'\');')[0]
         return self.newFalconData(key='database_size',val=v);
     
     def get_blocked(self):
@@ -150,18 +332,17 @@ def usage():
     sys.exit(2)
 
 def main():
-
     if len(sys.argv[1:]) == 0:
         usage()
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:],"t:f:a:v:d:h:u:p:D::e",['--help'])
+        opts, args = getopt.getopt(sys.argv[1:],"t:f:a:v:d:h:u:p:D:h:e",['--help'])
     except getopt.GetoptError:
         usage()
 
     global debug,timestamp,falconAgentUrl,Step,Metric,alwaysSend,defaultDataWhenFailed,host,port,user,pswd,db
     for opt, arg in opts:
-        if opt in ('-H','--help'):
+        if opt in ('-h','--help'):
             usage()
         if opt == '-t':
             Step = arg
